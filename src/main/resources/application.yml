@@ -17,7 +17,8 @@ spring:
   cloud:
     gateway:
       default-filters:
-        - name: SaveSession
+        - SaveSession
+        - TokenRelay
         - name: RequestRateLimiter
           args:
             redis-rate-limiter:
@@ -81,8 +82,7 @@ spring:
           keycloak:
             clientId: edge-service
             clientSecret: polar-keycloak-secret
-            scope:
-              - openid
+            scope: openid,roles
         provider:
           keycloak:
             issuerUri: http://localhost:8080/realms/PolarBookshop
